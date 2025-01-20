@@ -269,63 +269,128 @@
     </div>
   </div>
 
+переведи укр текст на польский 
+
+ChatGPT сказал:
+ChatGPT
+Ось переклад вашого тексту з української на польську:
+
+html
+Копировать
+Редактировать
+<body>
+  <header>
+    <img src="https://push-school.com/wp-content/themes/push/images/LOGO.png" alt="Logo Push School">
+    <h1>Plan lekcji<br>Klasa 1<br>Push School Warsaw</h1>
+  </header>
+  <div class="container">
+  <div class="links-container">
+    <h3>Przydatne linki:</h3>
+    <ul>
+    <li><a href="https://prosvita.net/" target="_blank">Prosvita</a></li>
+    </ul>
+    <h3>Podręczniki:</h3>
+    <ul>
+    <li><a href="https://online.flipbuilder.com/sdtta/acov/" target="_blank">Academy Stars 1: Pupil's book</a></li>
+    <li><a href="https://online.flipbuilder.com/sdtta/mxjn/" target="_blank">Academy Stars 1: Workbook</a></li>
+    <li><a href="https://shkola.in.ua/1185-bukvar-1-klas-ponomarova-2018-chastyna-1.html" target="_blank">Bukvarz 1 klasa (część 1) / Ponomarowa</a></li>
+    <li><a href="https://shkola.in.ua/1186-bukvar-1-klas-ponomarova-2018-chastyna-2.html" target="_blank">Bukvarz 1 klasa (część 2) / Ponomarowa</a></li>
+    <li><a href="https://znayshov.com/FR/12164/Propisi_1kl_Ponomarova_2.pdf" target="_blank">Mój pierwszy zeszyt. Propisy. 1 klasa / Husełnikowa</a></li>
+    <li><a href="https://shkola.in.ua/2808-matematyka-1-klas-his-2023.html" target="_blank">Matematyka 1 klasa / His</a></li>
+    </ul>
+  </div>
+    <div class="tables-container">
+      <div class="current-lesson" id="current-lesson">Aktualnie brak lekcji.</div>
+      <h2>Plan na dzisiaj</h2>
+      <table id="daily-schedule">
+        <thead>
+          <tr>
+            <th>Nr</th>
+            <th>Lekcja</th>
+            <th>Czas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dane dodawane przez JavaScript -->
+        </tbody>
+      </table>
+      <h2>Plan na tydzień</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Dzień</th>
+            <th>Nr</th>
+            <th>Lekcja</th>
+            <th>Czas</th>
+          </tr>
+        </thead>
+        <tbody id="weekly-schedule">
+          <!-- Dane dodawane przez JavaScript -->
+        </tbody>
+      </table>
+    </div>
+    <div class="image-container-right">
+      <img class="google-image" src="https://i.postimg.cc/3wpTvvmt/2.png" alt="Obraz Google Drive" onclick="zoomImage(this)">
+    </div>
+  </div>
+
  <script>
 const schedule = {
-  "Понеділок": [
-    { number: 1, subject: "Навчання грамоти", time: "9:00 - 9:45" },
-    { number: " ", subject: "Перерва", time: "9:45 - 9:55" },
-    { number: 2, subject: "Навчання грамоти", time: "9:55 - 10:40" },
-    { number: " ", subject: "Перерва", time: "10:40 - 10:50" },
-    { number: 3, subject: "Математика", time: "10:50 - 11:35" },
-    { number: " ", subject: "Обід 1-4 класи", time: "11:35 - 11:55" },
-    { number: 4, subject: "Англійська мова", time: "11:55 - 12:40" },
+  "Poniedziałek": [
+    { number: 1, subject: "Nauka czytania i pisania", time: "9:00 - 9:45" },
+    { number: " ", subject: "Przerwa", time: "9:45 - 9:55" },
+    { number: 2, subject: "Nauka czytania i pisania", time: "9:55 - 10:40" },
+    { number: " ", subject: "Przerwa", time: "10:40 - 10:50" },
+    { number: 3, subject: "Matematyka", time: "10:50 - 11:35" },
+    { number: " ", subject: "Obiad klasy 1-4", time: "11:35 - 11:55" },
+    { number: 4, subject: "Język angielski", time: "11:55 - 12:40" },
   ],
-  "Вівторок": [
-    { number: 1, subject: "Навчання грамоти", time: "9:00 - 9:45" },
-    { number: " ", subject: "Перерва", time: "9:45 - 9:55" },
-    { number: 2, subject: "Навчання грамоти", time: "9:55 - 10:40" },
-    { number: " ", subject: "Перерва", time: "10:40 - 10:50" },
-    { number: 3, subject: "Математика", time: "10:50 - 11:35" },
-    { number: " ", subject: "Обід 1-4 класи", time: "11:35 - 11:55" },
+  "Wtorek": [
+    { number: 1, subject: "Nauka czytania i pisania", time: "9:00 - 9:45" },
+    { number: " ", subject: "Przerwa", time: "9:45 - 9:55" },
+    { number: 2, subject: "Nauka czytania i pisania", time: "9:55 - 10:40" },
+    { number: " ", subject: "Przerwa", time: "10:40 - 10:50" },
+    { number: 3, subject: "Matematyka", time: "10:50 - 11:35" },
+    { number: " ", subject: "Obiad klasy 1-4", time: "11:35 - 11:55" },
     { number: 4, subject: "Przyroda", time: "11:55 - 12:40" },
-    { number: " ", subject: "Обід 5-6 класи", time: "12:40 - 13:00" },
+    { number: " ", subject: "Obiad klasy 5-6", time: "12:40 - 13:00" },
     { number: 5, subject: "Plastyka", time: "13:00 - 13:45" },
   ],
-  "Середа": [
-    { number: 1, subject: "Навчання грамоти", time: "9:00 - 9:45" },
-    { number: " ", subject: "Перерва", time: "9:45 - 9:55" },
-    { number: 2, subject: "Математика", time: "9:55 - 10:40" },
-    { number: " ", subject: "Перерва", time: "10:40 - 10:50" },
-    { number: 3, subject: "Jezyk Polski", time: "10:50 - 11:35" },
-    { number: " ", subject: "Обід 1-4 класи", time: "11:35 - 11:55" },
-    { number: 4, subject: "Англійська мова", time: "11:55 - 12:40" },
-    { number: " ", subject: "Обід 5-6 класи", time: "12:40 - 13:00" },
-    { number: 5, subject: "Англійська мова", time: "13:00 - 13:45" },
+  "Środa": [
+    { number: 1, subject: "Nauka czytania i pisania", time: "9:00 - 9:45" },
+    { number: " ", subject: "Przerwa", time: "9:45 - 9:55" },
+    { number: 2, subject: "Matematyka", time: "9:55 - 10:40" },
+    { number: " ", subject: "Przerwa", time: "10:40 - 10:50" },
+    { number: 3, subject: "Język polski", time: "10:50 - 11:35" },
+    { number: " ", subject: "Obiad klasy 1-4", time: "11:35 - 11:55" },
+    { number: 4, subject: "Język angielski", time: "11:55 - 12:40" },
+    { number: " ", subject: "Obiad klasy 5-6", time: "12:40 - 13:00" },
+    { number: 5, subject: "Język angielski", time: "13:00 - 13:45" },
   ],
-  "Четвер": [
-    { number: 1, subject: "Навчання грамоти", time: "9:00 - 9:45" },
-    { number: " ", subject: "Перерва", time: "9:45 - 9:55" },
-    { number: 2, subject: "Навчання грамоти", time: "9:55 - 10:40" },
-    { number: " ", subject: "Перерва", time: "10:40 - 10:50" },
-    { number: 3, subject: "Jezyk Polski", time: "10:50 - 11:35" },
-    { number: " ", subject: "Обід 1-4 класи", time: "11:35 - 11:55" },
-    { number: 4, subject: "Математика", time: "11:55 - 12:40" },
-    { number: " ", subject: "Обід 5-6 класи", time: "12:40 - 13:00" },
+  "Czwartek": [
+    { number: 1, subject: "Nauka czytania i pisania", time: "9:00 - 9:45" },
+    { number: " ", subject: "Przerwa", time: "9:45 - 9:55" },
+    { number: 2, subject: "Nauka czytania i pisania", time: "9:55 - 10:40" },
+    { number: " ", subject: "Przerwa", time: "10:40 - 10:50" },
+    { number: 3, subject: "Język polski", time: "10:50 - 11:35" },
+    { number: " ", subject: "Obiad klasy 1-4", time: "11:35 - 11:55" },
+    { number: 4, subject: "Matematyka", time: "11:55 - 12:40" },
+    { number: " ", subject: "Obiad klasy 5-6", time: "12:40 - 13:00" },
     { number: 5, subject: "Plastyka", time: "13:00 - 13:45" },
-    { number: " ", subject: "Перерва", time: "13:45 - 13:55" },
-    { number: 6, subject: "Англійська мова", time: "13:55 - 14:40" },
+    { number: " ", subject: "Przerwa", time: "13:45 - 13:55" },
+    { number: 6, subject: "Język angielski", time: "13:55 - 14:40" },
   ],
-  "П'ятниця": [
-    { number: 1, subject: "Я досліджую світ", time: "9:00 - 9:45" },
-    { number: " ", subject: "Перерва", time: "9:45 - 9:55" },
-    { number: 2, subject: "Jezyk Polski", time: "9:55 - 10:40" },
-    { number: " ", subject: "Перерва", time: "10:40 - 10:50" },
+  "Piątek": [
+    { number: 1, subject: "Poznaję świat", time: "9:00 - 9:45" },
+    { number: " ", subject: "Przerwa", time: "9:45 - 9:55" },
+    { number: 2, subject: "Język polski", time: "9:55 - 10:40" },
+    { number: " ", subject: "Przerwa", time: "10:40 - 10:50" },
     { number: 3, subject: "Edukacja wczesnoszkolna", time: "10:50 - 11:35" },
-    { number: " ", subject: "Обід 1-4 класи", time: "11:35 - 11:55" },
-    { number: " ", subject: "Очікування автобусу", time: "11:55 - 12:20" },
-    { number: " ", subject: "Шлях зі школи до басейну на автобусі", time: "12:20 - 12:45" },
-    { number: 4, subject: "Wyhowanie фізичне (басейн)", time: "13:00 - 14:00" },
-    { number: " ", subject: "Шлях з басейну до школи на автобусі", time: "14:30 - 14:55" },
+    { number: " ", subject: "Obiad klasy 1-4", time: "11:35 - 11:55" },
+    { number: " ", subject: "Oczekiwanie na autobus", time: "11:55 - 12:20" },
+    { number: " ", subject: "Droga ze szkoły na basen autobusem", time: "12:20 - 12:45" },
+    { number: 4, subject: "Wychowanie fizyczne (basen)", time: "13:00 - 14:00" },
+    { number: " ", subject: "Droga z basenu do szkoły autobusem", time: "14:30 - 14:55" },
   ],
 };
 
@@ -342,7 +407,7 @@ function getCurrentLesson(daySchedule) {
     });
 
     if (currentTime >= start && currentTime < end) {
-      if (lesson.subject === "Перерва" || lesson.subject.includes("Обід")) {
+      if (lesson.subject === "Przerwa" || lesson.subject.includes("Obiad")) {
         return { type: "break", lesson };
       }
       return { type: "lesson", lesson };
@@ -364,7 +429,7 @@ function getCurrentLesson(daySchedule) {
 }
 
 function renderSchedule() {
-  const daysOfWeek = ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота"];
+  const daysOfWeek = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
   const today = new Date().getDay();
   const daySchedule = schedule[daysOfWeek[today]] || [];
 
@@ -372,7 +437,7 @@ function renderSchedule() {
   dailyScheduleTable.innerHTML = '';
 
   daySchedule.forEach(lesson => {
-    const isBreak = lesson.subject === "Перерва" || lesson.subject.includes("Обід");
+    const isBreak = lesson.subject === "Przerwa" || lesson.subject.includes("Obiad");
     const row = `<tr class="${isBreak ? 'highlight' : ''}">
       <td>${lesson.number}</td>
       <td>${lesson.subject}</td>
@@ -387,34 +452,34 @@ function renderSchedule() {
   if (currentLessonData) {
     if (currentLessonData.type === "lesson") {
       const lesson = currentLessonData.lesson;
-      currentLessonDiv.textContent = `Зараз урок: ${lesson.subject} (${lesson.time})`;
+      currentLessonDiv.textContent = `Teraz lekcja: ${lesson.subject} (${lesson.time})`;
     } else if (currentLessonData.type === "break") {
       const lesson = currentLessonData.lesson;
-      currentLessonDiv.textContent = `Зараз: ${lesson.subject} (${lesson.time})`;
+      currentLessonDiv.textContent = `Teraz: ${lesson.subject} (${lesson.time})`;
     } else if (currentLessonData.type === "finished") {
-      currentLessonDiv.textContent = "Заняття закінчилися.";
+      currentLessonDiv.textContent = "Zajęcia się skończyły.";
     }
   } else {
-    currentLessonDiv.textContent = "Зараз немає уроків.";
+    currentLessonDiv.textContent = "Teraz nie ma lekcji.";
   }
 
   const weeklyScheduleTable = document.querySelector("#weekly-schedule");
   weeklyScheduleTable.innerHTML = '';
 
-  const dayClasses = {
-    "Понеділок": "monday",
-    "Вівторок": "tuesday",
-    "Середа": "wednesday",
-    "Четвер": "thursday",
-    "П'ятниця": "friday",
-  };
+const dayClasses = {
+    "Poniedziałek": "monday",
+    "Wtorek": "tuesday",
+    "Środa": "wednesday",
+    "Czwartek": "thursday",
+    "Piątek": "friday",
+};
 
   for (const day in schedule) {
     const dayLessons = schedule[day];
     const dayClass = dayClasses[day] || "";
 
     dayLessons.forEach((lesson, index) => {
-      const isBreak = lesson.subject === "Перерва" || lesson.subject.includes("Обід");
+      const isBreak = lesson.subject === "Przerwa" || lesson.subject.includes("Obiad");
       const rowClass = isBreak ? "highlight" : dayClass;
 
       const row = `<tr class="${rowClass}">
