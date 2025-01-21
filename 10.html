@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Розклад уроків</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: Montserrat, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    header {
+      background-color: #00bcd5;
+      color: white;
+      text-align: center;
+      padding: 1em 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    header img {
+      width: 90px;
+      height: 90px;
+      border-radius: 15px;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      max-width: 2000px;
+      margin: 20px auto;
+      padding: 20px;
+      gap: 50px;
+      flex-wrap: wrap; /* Добавляем для адаптивности */
+    }
+    .schedule-container {
+      flex: 1;
+      text-align: center;
+      max-width: 800px;
+    }
+    .current-lesson {
+      font-size: 1.5em;
+      color: #333;
+      background-color: #e0f7fa;
+      border-left: 6px solid #4caf50;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+    .current-lesson:hover {
+      background-color: #b2ebf2;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    table {
+      width: calc(100% + 50px);
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .highlight {
+      background-color: #f0f0f0;
+    }
+    .monday {
+      background-color: #d1f7e7;
+    }
+    .tuesday {
+      background-color: #e0f7fa;
+    }
+    .wednesday {
+      background-color: #ffecb3;
+    }
+    .thursday {
+      background-color: #fff3e0;
+    }
+    .friday {
+      background-color: #fce4ec;
+    }
+    .google-image {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .image-container {
+      flex-shrink: 0;
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+    .links-container {
+      flex-shrink: 0;
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      margin-right: 50px;
+    }
+
+    .links-container ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .links-container li {
+      margin-bottom: 10px;
+    }
+
+    .links-container a {
+      text-decoration: none;
+      color: #00bcd5;
+      font-weight: bold;
+    }
+
+    .links-container a:hover {
+      text-decoration: underline;
+      color: #0288d1;
+    }
+
+    .image-container-right {
+      flex-shrink: 0;
+      width: 100%;
+      max-width: 500px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      margin-left: 50px;
+    }
+    .schedule-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 50px;
+      flex-wrap: nowrap;
+      width: 100%;
+    }
+    .tables-container {
+      width: calc(100% + 25px); /* Увеличено на 20px */
+      width: calc(100% + 50px); /* Увеличено на 20px */
+      max-width: 1500px; /* Увеличено на 20px от исходного */
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      margin: 0 50px;
+    }
+
+
+    /* Медиа-запрос для адаптивности */
+    @media screen and (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        gap: 30px;
+      }
+      .image-container, .image-container-left, .image-container-right {
+        max-width: 90%;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      .tables-container {
+        width: 100%;
+        margin: 0;
+      }
+    }
+    /* Адаптивное расположение картинок на больших экранах */
+    @media screen and (min-width: 900px) {
+      .container {
+        flex-wrap: nowrap;
+      }
+      .image-container-left {
+        margin-right: 50px;
+      }
+      .image-container-right {
+        margin-left: 50px;
+      }
+    }
+
+    /* Увеличение ширины таблиц */
+    table {
+      width: calc(100% + 10px);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="https://push-school.com/wp-content/themes/push/images/LOGO.png" alt="Logo Push School">
+    <h1>Plan lekcji<br>Klasa 1<br>Push School Warsaw</h1>
+  </header>
+  <div class="container">
+  <div class="links-container">
+    <h3>Przydatne linki:</h3>
+    <ul>
+    <li><a href="https://prosvita.net/" target="_blank">Prosvita</a></li>
+    </ul>
+    <h3>Podręczniki:</h3>
+    <ul>
+    <li><a href="https://online.flipbuilder.com/sdtta/acov/" target="_blank">Academy Stars 1: Pupil's book</a></li>
+    <li><a href="https://online.flipbuilder.com/sdtta/mxjn/" target="_blank">Academy Stars 1: Workbook</a></li>
+    <li><a href="https://shkola.in.ua/1185-bukvar-1-klas-ponomarova-2018-chastyna-1.html" target="_blank">Bukvarz 1 klasa (część 1) / Ponomarowa</a></li>
+    <li><a href="https://shkola.in.ua/1186-bukvar-1-klas-ponomarova-2018-chastyna-2.html" target="_blank">Bukvarz 1 klasa (część 2) / Ponomarowa</a></li>
+    <li><a href="https://znayshov.com/FR/12164/Propisi_1kl_Ponomarova_2.pdf" target="_blank">Mój pierwszy zeszyt. Propisy. 1 klasa / Husełnikowa</a></li>
+    <li><a href="https://shkola.in.ua/2808-matematyka-1-klas-his-2023.html" target="_blank">Matematyka 1 klasa / His</a></li>
+    </ul>
+  </div>
+    <div class="tables-container">
+      <div class="current-lesson" id="current-lesson">Aktualnie brak lekcji.</div>
+      <h2>Plan na dzisiaj</h2>
+      <table id="daily-schedule">
+        <thead>
+          <tr>
+            <th>Nr</th>
+            <th>Lekcja</th>
+            <th>Czas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dane dodawane przez JavaScript -->
+        </tbody>
+      </table>
+      <h2>Plan na tydzień</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Dzień</th>
+            <th>Nr</th>
+            <th>Lekcja</th>
+            <th>Czas</th>
+          </tr>
+        </thead>
+        <tbody id="weekly-schedule">
+          <!-- Dane dodawane przez JavaScript -->
+        </tbody>
+      </table>
+    </div>
+    <div class="image-container-right">
+      <img class="google-image" src="https://i.postimg.cc/gcZFYcfn/PL.png" alt="Obraz Google Drive" onclick="zoomImage(this)">
+    </div>
+  </div>
+
+ <script>
+const schedule = {
+  "Poniedziałek": [
+    { "number": 1, "subject": "Fizyka", "time": "9:00 - 9:45" },
+    { "number": " ", "subject": "Przerwa", "time": "9:45 - 9:55" },
+    { "number": 2, "subject": "Język polski", "time": "9:55 - 10:40" },
+    { "number": " ", "subject": "Przerwa", "time": "10:40 - 10:50" },
+    { "number": 3, "subject": "Biologia", "time": "10:50 - 11:35" },
+    { "number": " ", "subject": "Obiad", "time": "11:35 - 11:55" },
+    { "number": 4, "subject": "Fizyka", "time": "11:55 - 12:40" },
+    { "number": " ", "subject": "Przerwa", "time": "12:40 - 13:00" },
+    { "number": 5, "subject": "Biologia", "time": "13:00 - 13:45" },
+    { "number": " ", "subject": "Przerwa", "time": "13:45 - 13:55" },
+    { "number": 6, "subject": "Język angielski", "time": "13:55 - 14:40" }
+  ],
+  "Wtorek": [
+    { "number": 1, "subject": "Język ukraiński", "time": "9:00 - 9:45" },
+    { "number": " ", "subject": "Przerwa", "time": "9:45 - 9:55" },
+    { "number": 2, "subject": "Geografia", "time": "9:55 - 10:40" },
+    { "number": " ", "subject": "Przerwa", "time": "10:40 - 10:50" },
+    { "number": 3, "subject": "Geografia", "time": "10:50 - 11:35" },
+    { "number": " ", "subject": "Obiad", "time": "11:35 - 11:55" },
+    { "number": 4, "subject": "Matematyka", "time": "11:55 - 12:40" },
+    { "number": " ", "subject": "Przerwa", "time": "12:40 - 13:00" },
+    { "number": 5, "subject": "Język ukraiński", "time": "13:00 - 13:45" },
+    { "number": " ", "subject": "Przerwa", "time": "13:45 - 13:55" },
+    { "number": 6, "subject": "Język angielski", "time": "13:55 - 14:40" }
+  ],
+  "Środa": [
+    { "number": 1, "subject": "Matematyka", "time": "9:00 - 9:45" },
+    { "number": " ", "subject": "Przerwa", "time": "9:45 - 9:55" },
+    { "number": 2, "subject": "Język polski", "time": "9:55 - 10:40" },
+    { "number": " ", "subject": "Przerwa", "time": "10:40 - 10:50" },
+    { "number": 3, "subject": "Chemia", "time": "10:50 - 11:35" },
+    { "number": " ", "subject": "Obiad", "time": "11:35 - 11:55" },
+    { "number": 4, "subject": "Matematyka", "time": "11:55 - 12:40" },
+    { "number": " ", "subject": "Przerwa", "time": "12:40 - 13:00" },
+    { "number": 5, "subject": "Historia Ukrainy", "time": "13:00 - 13:45" },
+    { "number": " ", "subject": "Przerwa", "time": "13:45 - 13:55" },
+    { "number": 6, "subject": "Język angielski", "time": "13:55 - 14:40" }
+  ],
+  "Czwartek": [
+    { "number": 1, "subject": "Chemia", "time": "9:00 - 9:45" },
+    { "number": " ", "subject": "Przerwa", "time": "9:45 - 9:55" },
+    { "number": 2, "subject": "Matematyka", "time": "9:55 - 10:40" },
+    { "number": " ", "subject": "Przerwa", "time": "10:40 - 10:50" },
+    { "number": 3, "subject": "Język ukraiński", "time": "10:50 - 11:35" },
+    { "number": " ", "subject": "Obiad", "time": "11:35 - 11:55" },
+    { "number": 4, "subject": "Historia Polski", "time": "11:55 - 12:40" },
+    { "number": " ", "subject": "Przerwa", "time": "12:40 - 13:00" },
+    { "number": 5, "subject": "Matematyka", "time": "13:00 - 13:45" },
+    { "number": " ", "subject": "Przerwa", "time": "13:45 - 13:55" },
+    { "number": 6, "subject": "Informatyka", "time": "13:55 - 14:40" }
+  ],
+  "Piątek": [
+    { "number": 1, "subject": "Historia powszechna", "time": "9:00 - 9:45" },
+    { "number": " ", "subject": "Przerwa", "time": "9:45 - 9:55" },
+    { "number": 2, "subject": "Historia Ukrainy", "time": "9:55 - 10:40" },
+    { "number": " ", "subject": "Przerwa", "time": "10:40 - 10:50" },
+    { "number": 3, "subject": "Matematyka", "time": "10:50 - 11:35" },
+    { "number": " ", "subject": "Obiad", "time": "11:35 - 11:55" },
+    { "number": 4, "subject": "Język polski", "time": "11:55 - 12:40" },
+    { "number": " ", "subject": "Przerwa", "time": "12:40 - 13:00" },
+    { "number": 5, "subject": "Język ukraiński", "time": "13:00 - 13:45" },
+    { "number": " ", "subject": "Przerwa", "time": "13:45 - 13:55" },
+    { "number": 6, "subject": "Język angielski", "time": "13:55 - 14:40" }
+  ],
+
+};
+
+function getCurrentLesson(daySchedule) {
+  const now = new Date();
+  const currentHour = now.getHours();
+  const currentMinutes = now.getMinutes();
+  const currentTime = currentHour * 60 + currentMinutes;
+
+  for (let lesson of daySchedule) {
+    const [start, end] = lesson.time.split(" - ").map(time => {
+      const [hours, minutes] = time.split(":").map(Number);
+      return hours * 60 + minutes;
+    });
+
+    if (currentTime >= start && currentTime < end) {
+      if (lesson.subject === "Przerwa" || lesson.subject.includes("Obiad")) {
+        return { type: "break", lesson };
+      }
+      return { type: "lesson", lesson };
+    }
+  }
+
+  // Если текущее время после всех уроков
+  if (daySchedule.length > 0) {
+    const lastLessonEnd = daySchedule[daySchedule.length - 1].time.split(" - ")[1];
+    const [hours, minutes] = lastLessonEnd.split(":").map(Number);
+    const lastLessonEndTime = hours * 60 + minutes;
+
+    if (currentTime >= lastLessonEndTime) {
+      return { type: "finished" };
+    }
+  }
+
+  return null;
+}
+
+function renderSchedule() {
+  const daysOfWeek = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
+  const today = new Date().getDay();
+  const daySchedule = schedule[daysOfWeek[today]] || [];
+
+  const dailyScheduleTable = document.querySelector("#daily-schedule tbody");
+  dailyScheduleTable.innerHTML = '';
+
+  daySchedule.forEach(lesson => {
+    const isBreak = lesson.subject === "Przerwa" || lesson.subject.includes("Obiad");
+    const row = `<tr class="${isBreak ? 'highlight' : ''}">
+      <td>${lesson.number}</td>
+      <td>${lesson.subject}</td>
+      <td>${lesson.time}</td>
+    </tr>`;
+    dailyScheduleTable.innerHTML += row;
+  });
+
+  const currentLessonData = getCurrentLesson(daySchedule);
+  const currentLessonDiv = document.getElementById("current-lesson");
+
+  if (currentLessonData) {
+    if (currentLessonData.type === "lesson") {
+      const lesson = currentLessonData.lesson;
+      currentLessonDiv.textContent = `Teraz lekcja: ${lesson.subject} (${lesson.time})`;
+    } else if (currentLessonData.type === "break") {
+      const lesson = currentLessonData.lesson;
+      currentLessonDiv.textContent = `Teraz: ${lesson.subject} (${lesson.time})`;
+    } else if (currentLessonData.type === "finished") {
+      currentLessonDiv.textContent = "Zajęcia się skończyły.";
+    }
+  } else {
+    currentLessonDiv.textContent = "Teraz nie ma lekcji.";
+  }
+
+  const weeklyScheduleTable = document.querySelector("#weekly-schedule");
+  weeklyScheduleTable.innerHTML = '';
+
+const dayClasses = {
+    "Poniedziałek": "monday",
+    "Wtorek": "tuesday",
+    "Środa": "wednesday",
+    "Czwartek": "thursday",
+    "Piątek": "friday",
+};
+
+  for (const day in schedule) {
+    const dayLessons = schedule[day];
+    const dayClass = dayClasses[day] || "";
+
+    dayLessons.forEach((lesson, index) => {
+      const isBreak = lesson.subject === "Przerwa" || lesson.subject.includes("Obiad");
+      const rowClass = isBreak ? "highlight" : dayClass;
+
+      const row = `<tr class="${rowClass}">
+        ${index === 0 ? `<td rowspan="${dayLessons.length}">${day}</td>` : ''}
+        <td>${lesson.number}</td>
+        <td>${lesson.subject}</td>
+        <td>${lesson.time}</td>
+      </tr>`;
+      weeklyScheduleTable.innerHTML += row;
+    });
+  }
+}
+
+renderSchedule();
+
+    function zoomImage(img) {
+      // Проверяем, если картинка уже увеличена, то вернем её в исходный размер
+      if (img.style.transform === "scale(2)") {
+        img.style.transform = "scale(1)";
+      } else {
+        img.style.transform = "scale(2)";
+      }
+      img.style.transition = "transform 0.3s ease";  // Плавное увеличение
+    }
+
+</script>
+</body>
+</html>
